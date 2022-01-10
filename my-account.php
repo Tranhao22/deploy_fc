@@ -19,10 +19,16 @@ if (isset($_POST['password']))
 $password='';
 $rs=query("select * from user_info where email='$email' and password='$password'");
 $rows=query("select * from admin_info where admin_email='$email' and admin_password='$password'");
-if ($row=mysqli_fetch_array($rows)||$r=mysqli_fetch_array($rs)){
-    header("location:admin/index.php");
-}else{
-    
+if (!empty($email)) {
+    if ($row = mysqli_fetch_array($rows) || $r = mysqli_fetch_array($rs)) {
+        header("location:admin/index.php");
+    } else {
+?>
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading"> Đăng nhâp lỗi</h4>
+        </div>
+<?php
+    }
 }
 ?>
 <!doctype html>
